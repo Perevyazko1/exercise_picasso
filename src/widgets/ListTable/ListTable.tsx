@@ -2,6 +2,7 @@ import {memo, ReactNode} from 'react';
 import {classNames, Mods} from "shared/lib/classNames/classNames";
 import {Button, Table} from "react-bootstrap";
 import {postApi} from "../../shared/api/RtkService";
+import {useNavigate} from "react-router-dom";
 
 interface ListTableProps {
     className?: string
@@ -12,6 +13,7 @@ interface ListTableProps {
 export const ListTable = memo((props: ListTableProps) => {
 
     const {data, isLoading, error} = postApi.useGetDataQuery(5)
+    const navigate = useNavigate()
 
     const {
         className,
@@ -45,7 +47,7 @@ export const ListTable = memo((props: ListTableProps) => {
                         <td>{post.id}</td>
                         <td>{post.title}</td>
                         <td>{post.content.length > 20 ? `${post.title.slice(0, 20)}...` : post.title}</td>
-                        <td><Button variant="secondary">Просмотр</Button></td>
+                        <td><Button onClick={()=> navigate(`/detail/id=${post.id}`)} variant="secondary">Просмотр</Button></td>
                     </tr>
                     )}
                 </tbody>

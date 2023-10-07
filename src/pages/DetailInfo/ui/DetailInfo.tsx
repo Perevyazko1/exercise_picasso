@@ -8,6 +8,7 @@ interface DetailInfoProps {
 }
 
 const DetailInfo = memo((props: DetailInfoProps) => {
+
     const {
         className,
         children,

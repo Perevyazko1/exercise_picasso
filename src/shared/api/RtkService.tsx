@@ -17,7 +17,7 @@ export const postApi = createApi({
 
         }),
         }),
-        getDetailPost: build.query<Post[], number>({
+        getDetailPost: build.query<Post, string>({
             query:(id)=>({
                 url: `/posts/${id}`
             }),

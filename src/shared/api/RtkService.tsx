@@ -7,7 +7,6 @@ export const postApi = createApi({
     baseQuery: fetchBaseQuery({
         baseUrl:"https://jsonplaceholder.org",
     }),
-    // tagTypes: ['Post'],
     endpoints: (build) => ({
         getData: build.query<Post[], number>({
             query:(limit:number=5)=>({
@@ -17,7 +16,11 @@ export const postApi = createApi({
                 }
 
         }),
-            // providesTags: result => ["Post"]
+        }),
+        getDetailPost: build.query<Post[], number>({
+            query:(id)=>({
+                url: `/posts/${id}`
+            }),
         }),
 })
 })

@@ -1,30 +1,36 @@
 import {memo, ReactNode} from 'react';
 import {classNames, Mods} from "shared/lib/classNames/classNames";
-import {DetailPost} from "../../../widgets/DetailPost/DetailPost";
+import {postApi} from "../../shared/api/RtkService";
 
-interface DetailInfoProps {
+interface DetailPostProps {
     className?: string
     children?: ReactNode
 }
 
-const DetailInfo = memo((props: DetailInfoProps) => {
+
+export const DetailPost = memo((props: DetailPostProps) => {
+
+    const {data, isLoading, error} = postApi.useGetDetailPostQuery(1)
+    console.log(data)
+    console.log(isLoading)
+    console.log(error)
+
     const {
         className,
         children,
         ...otherProps
     } = props
-    
+
     const mods: Mods = {
-        
+
     };
-    
+
     return (
         <div
             className={classNames('', mods, [className])}
             {...otherProps}
         >
-            <DetailPost/>
+            {children}
         </div>
     );
 });
-export default DetailInfo

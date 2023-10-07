@@ -1,12 +1,17 @@
 import React from 'react';
-import logo from '../logo.svg';
 import './style/index.scss'
-import {MainPage} from "../pages/MainPage/MainPage";
+import {MainPage} from "../pages/MainPage";
+import {Route, Routes} from "react-router-dom";
+import {DetailInfo} from "../pages/DetailInfo";
 
 function App() {
   return (
     <>
-        <MainPage></MainPage>
+        <Routes>
+            <Route path={"/"} element={<MainPage/>}/>
+            <Route path={"/detail"} element={<DetailInfo/>}/>
+        </Routes>
+
     </>
   );
 }

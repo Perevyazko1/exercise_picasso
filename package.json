@@ -2,6 +2,7 @@
   "name": "test_exercise",
   "version": "0.1.0",
   "private": true,
+  "homepage": "https://perevyazko1.github.io/test_exercise.github.io/",
   "dependencies": {
     "@reduxjs/toolkit": "^1.9.7",
     "@testing-library/jest-dom": "^5.17.0",
@@ -46,5 +47,8 @@
       "last 1 firefox version",
       "last 1 safari version"
     ]
+  },
+  "devDependencies": {
+    "gh-pages": "^6.0.0"
   }
 }

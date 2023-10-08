@@ -5,14 +5,15 @@ import {Post} from "./Post";
 export const postApi = createApi({
     reducerPath: 'postApi',
     baseQuery: fetchBaseQuery({
-        baseUrl:"https://jsonplaceholder.org",
+        baseUrl:"https://jsonplaceholder.typicode.com",
     }),
     endpoints: (build) => ({
-        getData: build.query<Post[], number>({
-            query:(limit:number=5)=>({
+        getData: build.query<Post[], {limit:number,start:number}>({
+            query:({limit=5, start=0 })=>({
                 url: `/posts` ,
                 params:{
-                    _limit: limit
+                    _limit:start + limit,
+                    _start: start,
                 }
 
         }),

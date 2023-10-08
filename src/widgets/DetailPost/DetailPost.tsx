@@ -41,26 +41,10 @@ export const DetailPost = memo((props: DetailPostProps) => {
             {error && <h1>Ошибка загрузки</h1>}
             {data &&
                 <div>
-                    <p className={cls.Headers}>slug</p>
-                    <div className={cls.Value}>{data.slug}</div>
-                    <p className={cls.Headers}>url</p>
-                    <div className={cls.Value}>{data.url}</div>
                     <p className={cls.Headers}>title</p>
                     <div className={cls.Value}>{data.title}</div>
-                    <p className={cls.Headers}>content</p>
-                    <div className={cls.Value}>{data.content}</div>
-                    <p className={cls.Headers}>image</p>
-                    <img className={cls.Value} src={data.image}/>
-                    <p className={cls.Headers}>thumbnail</p>
-                    <div className={cls.Value}>{data.thumbnail}</div>
-                    <p className={cls.Headers}>status</p>
-                    <div className={cls.Value}>{data.status}</div>
-                    <p className={cls.Headers}>category</p>
-                    <div className={cls.Value}>{data.category}</div>
-                    <p className={cls.Headers}>publishedAt</p>
-                    <div className={cls.Value}>{data.publishedAt}</div>
-                    <p className={cls.Headers}>updatedAt</p>
-                    <div className={cls.Value}>{data.updatedAt}</div>
+                    <p className={cls.Headers}>body</p>
+                    <div className={cls.Value}>{data.body}</div>
                     <p className={cls.Headers}>userId</p>
                     <div className={cls.Value}>{data.userId}</div>
                 </div>

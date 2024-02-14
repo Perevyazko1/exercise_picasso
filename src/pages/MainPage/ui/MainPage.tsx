@@ -1,5 +1,5 @@
 import {memo, ReactNode} from 'react';
-import {ListTable} from "../../../widgets/ListTable/ListTable";
+import {ListTable} from "widgets/ListTable/ListTable";
 
 interface MainPageProps {
     className?: string

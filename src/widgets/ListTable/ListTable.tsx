@@ -1,8 +1,11 @@
-import {memo, ReactNode, useEffect, useState} from 'react';
+import {memo, MutableRefObject, ReactNode, useEffect, useRef, useState} from 'react';
 import {classNames, Mods} from "shared/lib/classNames/classNames";
 import {Button, Table} from "react-bootstrap";
-import {postApi} from "../../shared/api/RtkService";
+import {postApi} from "shared/api/RtkService";
 import {useNavigate} from "react-router-dom";
+import {useInfiniteScroll} from "shared/hooks/useInfinityScroll/useInfinityScroll";
+import {useAppdispatch, useAppSelector} from "shared/hooks/Redux/redux";
+import {postInfoSlice} from "shared/api/Slice/PostSlice";
 
 interface ListTableProps {
     className?: string
@@ -15,58 +18,39 @@ export const ListTable = memo((props: ListTableProps) => {
 
     const navigate = useNavigate()
     const [currentPostStart, setCurrentPostStart] = useState(0);
-    const [isMyFetchingDown, setIsFetchingDown] = useState(false);
-    const [isMyFetchingUp, setIsMyFetchingUp] = useState(false);
 
-    const {data, isLoading, error} = postApi.useGetDataQuery({limit:25,start:currentPostStart})
-
-
-    useEffect(()=>{
-    if(isMyFetchingUp)
-    {
-        setCurrentPostStart(prev=>{
-            return prev>0?prev-1:prev
-        })
-        setIsMyFetchingUp(false)
-    }
-    },[isMyFetchingUp])
-
+    const dispatch = useAppdispatch()
+    const {PostSlice} = postInfoSlice.actions
+    const {PostUpdateSlice} = postInfoSlice.actions
+    const {postState} = useAppSelector(state => state.PostSlice)
+    const {data, isLoading, error} = postApi.useGetDataQuery({limit: 25, start: currentPostStart})
     useEffect(() => {
-      if (isMyFetchingDown) {
-        fetchMorePosts();
-        setIsFetchingDown(false);
-      }
-    }, [isMyFetchingDown]);
+        if (data) {
+            if (postState.length === 1) {
+                dispatch(PostSlice(data))
+            } else {
+                dispatch(PostUpdateSlice(data))
+            }
+        }
+
+    }, [data]);
 
 
-    useEffect(()=>{
-      document.addEventListener('scroll',scrollHandler)
-      return ()=>{
-        document.removeEventListener('scroll',scrollHandler)
-      }
-    },[])
-
-
-    const scrollHandler = (e: any): void => {
-      if (e.target.documentElement.scrollTop < 200) {
-        setIsMyFetchingUp(true);
-      }
-      if (
-        e.target.documentElement.scrollHeight -
-          e.target.documentElement.scrollTop -
-          window.innerHeight <
-        50
-      ) {
-        setIsFetchingDown(true);
-      }
+    const onScrollEnd = () => {
+        if (postState.length < 76) {
+            setCurrentPostStart(postState.length)
+        }
     };
 
-    const fetchMorePosts = (): void => {
-      setCurrentPostStart((prev) => {
-        return prev + 1;
-      });
-    };
 
+
+
+    const triggerRef = useRef() as MutableRefObject<HTMLDivElement>
+
+    useInfiniteScroll({
+        triggerRef,
+        callback: onScrollEnd
+    })
 
     const {
         className,
@@ -74,16 +58,14 @@ export const ListTable = memo((props: ListTableProps) => {
         ...otherProps
     } = props
 
-    const mods: Mods = {
-
-    };
+    const mods: Mods = {};
 
     return (
         <div
             className={classNames('', mods, [className])}
             {...otherProps}
         >
-            {isLoading && <h1>Загрузка постов...</h1>}
+            {isLoading && <h1 style={{height: "1000px"}}>Загрузка постов...</h1>}
             {error && <h1>Ошибка загрузки</h1>}
             <Table striped bordered hover responsive>
                 <thead>
@@ -95,16 +77,18 @@ export const ListTable = memo((props: ListTableProps) => {
                 </tr>
                 </thead>
                 <tbody>
-                    {data && data.map(post =>
-                    <tr key={post.id}>
-                        <td>{post.id}</td>
-                        <td>{post.title}</td>
-                        <td>{post.body.length > 20 ? `${post.title.slice(0, 20)}...` : post.title}</td>
-                        <td><Button onClick={()=> navigate(`/detail/id=${post.id}`)} variant="secondary">Просмотр</Button></td>
+                {postState && postState.map((post, index) =>
+                    <tr  key={index}>
+                            <td>{post.id}</td>
+                            <td>{post.title}</td>
+                            <td>{post.body.length > 20 ? `${post.title.slice(0, 20)}...` : post.title}</td>
+                            <td><Button onClick={() => navigate(`/detail/id=${post.id}`)}
+                                        variant="secondary">Просмотр</Button></td>
                     </tr>
-                    )}
+                )}
                 </tbody>
             </Table>
+            <div style={{height: "20px"}} ref={triggerRef}></div>
         </div>
     );
 });

@@ -1,19 +1,19 @@
 {
   "files": {
-    "main.css": "/exercise_picasso.github.io/static/css/main.86fccbdd.css",
-    "main.js": "/exercise_picasso.github.io/static/js/main.bb4ab1fc.js",
-    "static/js/481.2034b48a.chunk.js": "/exercise_picasso.github.io/static/js/481.2034b48a.chunk.js",
-    "static/css/897.067614b6.chunk.css": "/exercise_picasso.github.io/static/css/897.067614b6.chunk.css",
-    "static/js/897.cf51fa80.chunk.js": "/exercise_picasso.github.io/static/js/897.cf51fa80.chunk.js",
-    "index.html": "/exercise_picasso.github.io/index.html",
-    "main.86fccbdd.css.map": "/exercise_picasso.github.io/static/css/main.86fccbdd.css.map",
-    "main.bb4ab1fc.js.map": "/exercise_picasso.github.io/static/js/main.bb4ab1fc.js.map",
-    "481.2034b48a.chunk.js.map": "/exercise_picasso.github.io/static/js/481.2034b48a.chunk.js.map",
-    "897.067614b6.chunk.css.map": "/exercise_picasso.github.io/static/css/897.067614b6.chunk.css.map",
-    "897.cf51fa80.chunk.js.map": "/exercise_picasso.github.io/static/js/897.cf51fa80.chunk.js.map"
+    "main.css": "/exercise_picasso/static/css/main.86fccbdd.css",
+    "main.js": "/exercise_picasso/static/js/main.1767ba55.js",
+    "static/js/481.2034b48a.chunk.js": "/exercise_picasso/static/js/481.2034b48a.chunk.js",
+    "static/css/897.067614b6.chunk.css": "/exercise_picasso/static/css/897.067614b6.chunk.css",
+    "static/js/897.cf51fa80.chunk.js": "/exercise_picasso/static/js/897.cf51fa80.chunk.js",
+    "index.html": "/exercise_picasso/index.html",
+    "main.86fccbdd.css.map": "/exercise_picasso/static/css/main.86fccbdd.css.map",
+    "main.1767ba55.js.map": "/exercise_picasso/static/js/main.1767ba55.js.map",
+    "481.2034b48a.chunk.js.map": "/exercise_picasso/static/js/481.2034b48a.chunk.js.map",
+    "897.067614b6.chunk.css.map": "/exercise_picasso/static/css/897.067614b6.chunk.css.map",
+    "897.cf51fa80.chunk.js.map": "/exercise_picasso/static/js/897.cf51fa80.chunk.js.map"
   },
   "entrypoints": [
     "static/css/main.86fccbdd.css",
-    "static/js/main.bb4ab1fc.js"
+    "static/js/main.1767ba55.js"
   ]
 }

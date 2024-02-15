@@ -1,0 +1,1 @@
+{"version":3,"file":"static/css/225.7bc49f85.chunk.css","mappings":"AAGA,yBACI,cACA","sources":["widgets/ListTable/ListTable.module.scss"],"sourcesContent":[".ListTable{\n\n}\n.button{\n    display: block;\n    margin: 0 auto;\n}"],"names":[],"sourceRoot":""}

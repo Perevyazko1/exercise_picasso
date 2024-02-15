@@ -22,11 +22,13 @@ export function useInfiniteScroll({callback, callbackHide, triggerRef, wrapperRe
             }
 
         }, options);
+        if(triggerRef.current){
+            observer.current.observe(triggerRef.current)
+        }
 
-        observer.current.observe(triggerRef.current)
         return () => {
             if (observer.current) {
-                observer.current.unobserve(triggerRef.current)
+                triggerRef.current && observer.current.unobserve(triggerRef.current)
             }
 
         }

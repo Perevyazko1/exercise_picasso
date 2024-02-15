@@ -30,14 +30,6 @@ export const postInfoSlice = createSlice({
         PostUpdateSlice(state, action: PayloadAction<Post[]>) {
             state.postState = [...state.postState, ...action.payload];
         },
-        PostDeleteLastSlice(state, action: PayloadAction<number>) {
-            const deleteCount = action.payload;
-            state.postState = state.postState.slice(0, -deleteCount);
-        },
-        PostDeleteFirstSlice(state, action: PayloadAction<number>) {
-            const deleteCount = action.payload;
-            state.postState = state.postState.slice(deleteCount);
-        },
         PortionUpdateSlice(state, action: PayloadAction<number>) {
             state.portionPage = action.payload;
         },

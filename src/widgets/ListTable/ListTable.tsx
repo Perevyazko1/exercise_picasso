@@ -23,8 +23,10 @@ export const ListTable = memo((props: ListTableProps) => {
     const dispatch = useAppdispatch()
     const {PostSlice} = postInfoSlice.actions
     const {PostUpdateSlice} = postInfoSlice.actions
+    const {PortionUpdateSlice} = postInfoSlice.actions
     const {postState} = useAppSelector(state => state.PostSlice)
-    const {data, isLoading, error} = postApi.useGetDataQuery({limit: 25, start: currentPostStart})
+    const {portionPage} = useAppSelector(state => state.PostSlice)
+    const {data, isLoading, error} = postApi.useGetDataQuery({limit: 25, start: portionPage})
     const triggerRef = useRef() as MutableRefObject<HTMLDivElement>
     const wrapperRef = useRef() as MutableRefObject<HTMLDivElement>
     const rootRef = useRef() as MutableRefObject<HTMLDivElement>
@@ -41,9 +43,7 @@ export const ListTable = memo((props: ListTableProps) => {
     }, [data]);
 
     const onScrollEnd = () => {
-        if (postState.length < 76) {
-            setCurrentPostStart(postState.length)
-        }
+        dispatch(PortionUpdateSlice(postState.length))
     };
 
     const rowHeight = 50
@@ -64,10 +64,10 @@ export const ListTable = memo((props: ListTableProps) => {
             ));
         }
 
-        rootRef.current.addEventListener('scroll', onScroll);
+        rootRef.current && rootRef.current.addEventListener('scroll', onScroll);
 
         return () => {
-            rootRef.current.removeEventListener('scroll', onScroll);
+            rootRef.current && rootRef.current.removeEventListener('scroll', onScroll);
         }
     }, [postState.length, visibleRows, rowHeight]);
 
@@ -96,7 +96,7 @@ export const ListTable = memo((props: ListTableProps) => {
                 <div/>
                 <Table>
                     <thead className="thead-dark">
-                    <tr style={{height: getTopHeight()}}>
+                    <tr>
                         <th>Номер</th>
                         <th className="w-75">Заголовок</th>
                         <th className="w-50">Описание</th>
@@ -104,6 +104,7 @@ export const ListTable = memo((props: ListTableProps) => {
                     </tr>
                     </thead>
                     <tbody>
+                    <tr style={{height: getTopHeight()}}/>
                     {postState && postState.slice(startSlice, startSlice + visibleRows + 1).map((post, index) =>
                         <tr style={{height: rowHeight}} key={startSlice + index}>
                             <td>{post.id}</td>

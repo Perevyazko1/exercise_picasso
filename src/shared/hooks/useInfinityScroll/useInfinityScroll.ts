@@ -9,6 +9,7 @@ export interface UseInfiniteScrollProps {
 
 export function useInfiniteScroll({callback, callbackHide, triggerRef, wrapperRef}: UseInfiniteScrollProps) {
     const observer = useRef<IntersectionObserver | null>(null)
+    // let observer: IntersectionObserver | null = null
     useEffect(() => {
         const options = {
             root: null,
@@ -18,10 +19,6 @@ export function useInfiniteScroll({callback, callbackHide, triggerRef, wrapperRe
         observer.current = new IntersectionObserver(([entry]) => {
             if (entry.isIntersecting) {
                 callback()
-            }
-            if (!entry.isIntersecting){
-                if (callbackHide)
-                callbackHide()
             }
 
         }, options);

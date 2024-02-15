@@ -5,7 +5,7 @@ import {postApi} from "shared/api/RtkService";
 import {useNavigate} from "react-router-dom";
 import {useInfiniteScroll} from "shared/hooks/useInfinityScroll/useInfinityScroll";
 import {useAppdispatch, useAppSelector} from "shared/hooks/Redux/redux";
-import {postInfoSlice} from "shared/api/Slice/PostSlice";
+import {postInfoSlice} from "entities/Post/model/Slice/PostSlice";
 
 interface ListTableProps {
     className?: string
@@ -17,7 +17,6 @@ export const ListTable = memo((props: ListTableProps) => {
 
 
     const navigate = useNavigate()
-    const [currentPostStart, setCurrentPostStart] = useState(0);
     const [startSlice, setStartSlice] = useState(0)
 
     const dispatch = useAppdispatch()

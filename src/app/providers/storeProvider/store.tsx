@@ -1,6 +1,6 @@
 import {combineReducers, configureStore} from "@reduxjs/toolkit";
 import {postApi} from "shared/api/RtkService";
-import PostSlice from "shared/api/Slice/PostSlice";
+import PostSlice from "entities/Post/model/Slice/PostSlice";
 
 const rootReducer = combineReducers({
     PostSlice,
